@@ -4,11 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Raml.Common
+namespace RAML.Api.Core
 {
 	public class NetNamingMapper
 	{
-		private static readonly string[] reservedWords = {"Get", "Post", "Put", "Delete", "Options", "Head"};
+		private static readonly string[] ReservedWords = {"Get", "Post", "Put", "Delete", "Options", "Head", "ApiClient"};
 
 		public static string GetNamespace(string title)
 		{
@@ -35,7 +35,7 @@ namespace Raml.Common
 
 			name = RemoveIndalidChars(name);
 
-			if (reservedWords.Contains(name))
+			if (ReservedWords.Contains(name))
 				name += "Object";
 
 			if (StartsWithNumber(name))

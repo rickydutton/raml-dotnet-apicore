@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{050DDE
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raml.Api.Core.Tests", "Raml.Api.Core.Tests\Raml.Api.Core.Tests.csproj", "{EE496728-16DA-4B0D-B899-337A7D390A4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,10 @@ Global
 		{38B9703D-6167-4AAE-BAED-0C896C24A762}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38B9703D-6167-4AAE-BAED-0C896C24A762}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38B9703D-6167-4AAE-BAED-0C896C24A762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE496728-16DA-4B0D-B899-337A7D390A4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE496728-16DA-4B0D-B899-337A7D390A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE496728-16DA-4B0D-B899-337A7D390A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE496728-16DA-4B0D-B899-337A7D390A4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
