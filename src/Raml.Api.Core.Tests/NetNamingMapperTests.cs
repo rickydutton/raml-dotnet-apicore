@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using RAML.Api.Core;
+using Raml.Common;
 
 namespace Raml.Tools.Tests
 {

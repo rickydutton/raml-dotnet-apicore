@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Net.Http.Headers;
+using Raml.Common;
 #if PORTABLE
 using System.Reflection;
 #endif
