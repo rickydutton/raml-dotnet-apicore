@@ -12,14 +12,21 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>$copyright$</copyright>
-    <tags>RAML REST</tags>
-	<dependencies>
-	  <group targetFramework="net45">
-		<dependency id="Microsoft.AspNet.WebApi.Client" version="5.1.2" />
-	  </group>
-	</dependencies>
-	<frameworkAssemblies>
-	  <frameworkAssembly assemblyName="System.Web.Http" targetFramework="net45" />
-    </frameworkAssemblies>
+    <tags>RAML REST API SCHEMA MARKUP CLIENT SERVICE</tags>
+      <dependencies>
+          <dependency id="Microsoft.Net.Http" version="2.2.29" />
+          <dependency id="Newtonsoft.Json" version="6.0.4" />
+      </dependencies>
   </metadata>
+    <files>
+        <file src="bin\debug\Raml.Api.Core.dll" target="lib\net45\Raml.Api.Core.dll" />
+        <file src="bin\debug\Raml.Api.Core.dll" target="lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\Raml.Api.Core.dll" />
+        <file src="bin\debug\Raml.Api.Core.dll" target="lib\wpa81\Raml.Api.Core.dll" />
+        <file src="bin\debug\Raml.Api.Core.dll" target="lib\win8\Raml.Api.Core.dll" />
+        <file src="bin\debug\Raml.Api.Core.dll" target="lib\MonoAndroid10\Raml.Api.Core.dll" />
+        <file src="bin\debug\Raml.Api.Core.dll" target="lib\xamarinios10\Raml.Api.Core.dll" />
+        <file src="bin\debug\Raml.Api.Core.dll" target="lib\MonoTouch10\Raml.Api.Core.dll" />
+        <file src="bin\debug\Raml.Api.Core.dll" target="lib\portable-net45+win+wpa81\Raml.Api.Core.dll" />
+        <file src="bin\debug\Raml.Api.Core.dll" target="lib\Xamarin.iOS10\Raml.Api.Core.dll" />
+    </files>
 </package>
