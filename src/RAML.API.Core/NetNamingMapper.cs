@@ -8,7 +8,7 @@ namespace Raml.Common
 {
 	public class NetNamingMapper
 	{
-		private static readonly string[] reservedWords = {"Get", "Post", "Put", "Delete", "Options", "Head"};
+		private static readonly string[] ReservedWords = {"Get", "Post", "Put", "Delete", "Options", "Head", "ApiClient"};
 
 		public static string GetNamespace(string title)
 		{
@@ -29,13 +29,13 @@ namespace Raml.Common
             name = ReplaceSpecialChars(name, "(");
             name = ReplaceSpecialChars(name, ")");
             name = ReplaceSpecialChars(name, "'");
-
+            name = ReplaceSpecialChars(name, "`");
 			name = ReplaceSpecialChars(name, "{");
 			name = ReplaceSpecialChars(name, "}");
 
 			name = RemoveIndalidChars(name);
 
-			if (reservedWords.Contains(name))
+			if (ReservedWords.Contains(name))
 				name += "Object";
 
 			if (StartsWithNumber(name))
@@ -63,9 +63,15 @@ namespace Raml.Common
 
 		public static string RemoveIndalidChars(string input)
 		{
-			var validnamespace = Path.GetInvalidPathChars()
+#if !PORTABLE
+            var validnamespace = Path.GetInvalidPathChars()
 				.Aggregate(input, (current, invalidChar) => 
 					current.Replace(invalidChar.ToString(CultureInfo.InvariantCulture), string.Empty));
+#else
+            var validnamespace = Path.GetInvalidPathChars()
+                .Aggregate(input, (current, invalidChar) =>
+                    current.Replace(invalidChar.ToString(), string.Empty));
+#endif
 			validnamespace = validnamespace.Replace(" ", string.Empty);
 			validnamespace = validnamespace.Replace(".", string.Empty);
 			return validnamespace;
@@ -73,7 +79,11 @@ namespace Raml.Common
 
 		public static bool HasIndalidChars(string input)
 		{
+#if !PORTABLE
 			return Path.GetInvalidPathChars().Any(input.Contains);
+#else
+            return (input.IndexOfAny(Path.GetInvalidPathChars()) >= 0);
+#endif
 		}
 		public static string GetMethodName(string input)
 		{
@@ -85,6 +95,7 @@ namespace Raml.Common
             name = ReplaceSpecialChars(name, "(");
             name = ReplaceSpecialChars(name, ")");
             name = ReplaceSpecialChars(name, "'");
+            name = ReplaceSpecialChars(name, "`");
 			name = ReplaceUriParameters(name);
 			name = name.Replace(":", string.Empty);
 			name = RemoveIndalidChars(name);
@@ -107,8 +118,13 @@ namespace Raml.Common
 			if (!input.Contains("{"))
 				return input;
 
+#if !PORTABLE
 			input = input.Substring(0, input.IndexOf("{", StringComparison.InvariantCulture)) + "By" +
 			        input.Substring(input.IndexOf("{", StringComparison.InvariantCulture));
+#else
+            input = input.Substring(0, input.IndexOf("{", StringComparison.Ordinal)) + "By" +
+                    input.Substring(input.IndexOf("{", StringComparison.Ordinal));
+#endif
 
 			var name = String.Empty;
 			var words = input.Split(new[] { "{", "}" }, StringSplitOptions.RemoveEmptyEntries);
@@ -120,6 +136,7 @@ namespace Raml.Common
 			var propName = name.Replace(":", string.Empty);
 			propName = propName.Replace("/", string.Empty);
 			propName = propName.Replace("-", string.Empty);
+            propName = propName.Replace("`", string.Empty);
             propName = propName.Replace("+", "Plus");
             propName = propName.Replace(".", "Dot");
 			propName = Capitalize(propName);
