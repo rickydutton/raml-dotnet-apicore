@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <id>RAML.Api.Core</id>
+    <version>0.9.6</version>
+    <title>RAML.Api.Core</title>
+    <authors>MuleSoft Inc</authors>
+    <owners>MuleSoft Inc</owners>
     <projectUrl>https://github.com/mulesoft-labs/raml-dotnet-apicore</projectUrl>
 	<licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
 	<iconUrl>http://raml.org/images/logo.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <description>$description$</description>
-    <copyright>$copyright$</copyright>
+    <description>Core API support classes for the RAML tools package</description>
+    <copyright>Copyright © 2015 MuleSoft</copyright>
     <tags>RAML REST API SCHEMA MARKUP CLIENT SERVICE</tags>
       <dependencies>
           <dependency id="Microsoft.Net.Http" version="2.2.29" />
@@ -28,5 +28,6 @@
         <file src="bin\debug\Raml.Api.Core.dll" target="lib\MonoTouch10\Raml.Api.Core.dll" />
         <file src="bin\debug\Raml.Api.Core.dll" target="lib\portable-net45+win+wpa81\Raml.Api.Core.dll" />
         <file src="bin\debug\Raml.Api.Core.dll" target="lib\Xamarin.iOS10\Raml.Api.Core.dll" />
+        <file src="bin\debug\Raml.Api.Core.dll" target="lib\dotnet\Raml.Api.Core.dll" />
     </files>
 </package>
