@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -63,28 +62,21 @@ namespace Raml.Common
 
 		public static string RemoveIndalidChars(string input)
 		{
-#if !PORTABLE
-            var validnamespace = Path.GetInvalidPathChars()
-				.Aggregate(input, (current, invalidChar) => 
-					current.Replace(invalidChar.ToString(CultureInfo.InvariantCulture), string.Empty));
-#else
             var validnamespace = Path.GetInvalidPathChars()
                 .Aggregate(input, (current, invalidChar) =>
                     current.Replace(invalidChar.ToString(), string.Empty));
-#endif
+
 			validnamespace = validnamespace.Replace(" ", string.Empty);
 			validnamespace = validnamespace.Replace(".", string.Empty);
+            validnamespace = validnamespace.Replace("?", string.Empty);
 			return validnamespace;
 		}
 
 		public static bool HasIndalidChars(string input)
 		{
-#if !PORTABLE
-			return Path.GetInvalidPathChars().Any(input.Contains);
-#else
             return (input.IndexOfAny(Path.GetInvalidPathChars()) >= 0);
-#endif
 		}
+
 		public static string GetMethodName(string input)
 		{
             var name = ReplaceSpecialChars(input, "{mediaTypeExtension}");
@@ -118,13 +110,8 @@ namespace Raml.Common
 			if (!input.Contains("{"))
 				return input;
 
-#if !PORTABLE
-			input = input.Substring(0, input.IndexOf("{", StringComparison.InvariantCulture)) + "By" +
-			        input.Substring(input.IndexOf("{", StringComparison.InvariantCulture));
-#else
             input = input.Substring(0, input.IndexOf("{", StringComparison.Ordinal)) + "By" +
                     input.Substring(input.IndexOf("{", StringComparison.Ordinal));
-#endif
 
 			var name = String.Empty;
 			var words = input.Split(new[] { "{", "}" }, StringSplitOptions.RemoveEmptyEntries);
@@ -137,6 +124,7 @@ namespace Raml.Common
 			propName = propName.Replace("/", string.Empty);
 			propName = propName.Replace("-", string.Empty);
             propName = propName.Replace("`", string.Empty);
+            propName = propName.Replace("?", string.Empty);
             propName = propName.Replace("+", "Plus");
             propName = propName.Replace(".", "Dot");
 			propName = Capitalize(propName);

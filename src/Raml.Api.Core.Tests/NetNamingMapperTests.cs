@@ -26,9 +26,21 @@ namespace Raml.Tools.Tests
         }
 
         [Test]
+        public void Should_Remove_QuestionMark_From_Property_Names()
+        {
+            Assert.AreEqual("Optional", NetNamingMapper.GetPropertyName("optional?"));
+        }
+
+        [Test]
         public void Should_Remove_MediaTypeExtension_From_Object_Name()
         {
             Assert.AreEqual("Users", NetNamingMapper.GetObjectName("users{mediaTypeExtension}"));
+        }
+
+        [Test]
+        public void Should_Remove_QuestionMark_From_Object_Name()
+        {
+            Assert.AreEqual("Optional", NetNamingMapper.GetObjectName("optional?"));
         }
 
         [Test]
