@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http.Headers;
 using Raml.Common;
 #if PORTABLE
@@ -11,14 +13,29 @@ namespace RAML.Api.Core
 	{
 		public void SetProperties(HttpResponseHeaders headers)
 		{
-#if !PORTABLE
-            var properties = this.GetType().GetProperties().Where(p => p.GetValue(this) != null);
-#else
-            var properties = this.GetType().GetTypeInfo().DeclaredProperties.Where(p => p.GetValue(this) != null);
-#endif
+            var properties = this.GetType().GetTypeInfo().DeclaredProperties;
+
 			foreach (var prop in properties.Where(prop => headers.Any(h => h.Key == prop.Name)))
 			{
-				prop.SetValue(this, headers.First(h => NetNamingMapper.GetPropertyName(h.Key) == prop.Name));
+			    var value = headers.First(h => NetNamingMapper.GetPropertyName(h.Key) == prop.Name).Value;
+                if(value == null)
+                    continue;
+
+			    if (value.Count() == 1)
+			    {
+			        prop.SetValue(this, value.FirstOrDefault());
+			    }
+                else
+			    {
+			        try
+			        {
+                        prop.SetValue(this, value.FirstOrDefault());
+			        }
+			        catch (Exception)
+			        {
+                        // do nothing
+			        }
+			    }
 			}
 		}
 	}
