@@ -77,5 +77,18 @@ namespace Raml.Tools.Tests
             Assert.AreEqual("GetSalesId", NetNamingMapper.GetMethodName("get-/sales'id'"));
         }
 
+        [Test]
+        public void Should_Avoid_Brackets_In_Property_Name()
+        {
+            Assert.AreEqual("Sales", NetNamingMapper.GetPropertyName("sales[]"));
+            Assert.AreEqual("Salesperson", NetNamingMapper.GetPropertyName("(sales|person)[]"));
+        }
+
+        [Test]
+        public void Should_Avoid_Brackets_In_Object_Name()
+        {
+            Assert.AreEqual("Sales", NetNamingMapper.GetObjectName("sales[]"));
+            Assert.AreEqual("Salesperson", NetNamingMapper.GetObjectName("(sales|person)[]"));
+        }
     }
 }

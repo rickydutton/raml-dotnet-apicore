@@ -69,6 +69,12 @@ namespace Raml.Common
 			validnamespace = validnamespace.Replace(" ", string.Empty);
 			validnamespace = validnamespace.Replace(".", string.Empty);
             validnamespace = validnamespace.Replace("?", string.Empty);
+            validnamespace = validnamespace.Replace("[]", string.Empty);
+            validnamespace = validnamespace.Replace("[", string.Empty);
+            validnamespace = validnamespace.Replace("]", string.Empty);
+            validnamespace = validnamespace.Replace("(", string.Empty);
+            validnamespace = validnamespace.Replace(")", string.Empty);
+            validnamespace = validnamespace.Replace("|", string.Empty);
 			return validnamespace;
 		}
 
@@ -124,7 +130,14 @@ namespace Raml.Common
 			propName = propName.Replace("/", string.Empty);
 			propName = propName.Replace("-", string.Empty);
             propName = propName.Replace("`", string.Empty);
-            propName = propName.Replace("?", string.Empty);
+		    propName = propName.Replace("?", string.Empty)
+		        .Replace("[]", string.Empty)
+		        .Replace("[", string.Empty)
+		        .Replace("]", string.Empty)
+		        .Replace("(", string.Empty)
+		        .Replace(")", string.Empty)
+		        .Replace("|", string.Empty);
+
             propName = propName.Replace("+", "Plus");
             propName = propName.Replace(".", "Dot");
 			propName = Capitalize(propName);
@@ -142,8 +155,8 @@ namespace Raml.Common
 	            .Replace("/", string.Empty)
 	            .Replace(" ", "_")
 	            .Replace("-", "_")
-                .Replace("+", string.Empty)
-                .Replace(".", string.Empty);
+	            .Replace("+", string.Empty)
+	            .Replace(".", string.Empty);
 
             if (StartsWithNumber(value))
                 value = "E" + value;
