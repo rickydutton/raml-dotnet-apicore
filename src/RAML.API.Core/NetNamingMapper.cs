@@ -14,6 +14,19 @@ namespace Raml.Common
 			return Capitalize(RemoveIndalidChars(title));
 		}
 
+	    public static string GetVersionName(string input)
+	    {
+	        input = input.Replace(".", "_");
+	        input = RemoveIndalidChars(input);
+            input = input.Replace("+", string.Empty);
+	        input = Capitalize(input);
+
+	        if (StartsWithNumber(input))
+	            input = "V" + input;
+
+	        return input;
+	    }
+
 		public static string GetObjectName(string input)
 		{
 			if (string.IsNullOrWhiteSpace(input))
