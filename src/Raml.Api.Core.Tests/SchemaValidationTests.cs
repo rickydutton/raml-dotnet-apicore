@@ -119,7 +119,7 @@ namespace Raml.Tools.Tests
             var proxy = new Movies.MoviesApi(client);
             proxy.SchemaValidation.RaiseExceptions = true;
 
-            Assert.ThrowsAsync<SchemaValidationException>(async () => { var movies = await proxy.Movies.Get(); });
+            Assert.Throws<SchemaValidationException>(async () => { var movies = await proxy.Movies.Get(); });
         }
 
         [Test]
