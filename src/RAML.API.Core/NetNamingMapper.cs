@@ -9,9 +9,10 @@ namespace Raml.Common
 	{
 		private static readonly string[] ReservedWords = {"Get", "Post", "Put", "Delete", "Options", "Head", "ApiClient"};
 
-		public static string GetNamespace(string title)
+		public static string GetNamespace(string input)
 		{
-			return Capitalize(RemoveIndalidChars(title));
+            input = ReplaceSpecialChars(input, "-");
+			return Capitalize(RemoveIndalidChars(input));
 		}
 
 	    public static string GetVersionName(string input)

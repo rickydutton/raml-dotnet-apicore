@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
-using RAML.Api.Core;
 using Raml.Common;
 
-namespace Raml.Tools.Tests
+namespace Raml.Api.Core.Tests
 {
     [TestFixture]
     public class NetNamingMapperTests
@@ -89,6 +88,12 @@ namespace Raml.Tools.Tests
         {
             Assert.AreEqual("Sales", NetNamingMapper.GetObjectName("sales[]"));
             Assert.AreEqual("Salesperson", NetNamingMapper.GetObjectName("(sales|person)[]"));
+        }
+
+        [Test]
+        public void Should_Remove_Dash_From_Namespace()
+        {
+            Assert.AreEqual("GetSales", NetNamingMapper.GetNamespace("get-sales"));
         }
     }
 }
