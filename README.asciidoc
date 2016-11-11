@@ -6,11 +6,28 @@
 
 These are support classes for the Visual Studio extension https://github.com/mulesoft-labs/raml-dotnet-tools[RAML Tools for .NET].
 
-These classes are used in the generated code and also in the RAML extraction from an ASP.Net Web Api app.
-The nuget package is installed into the user project when adding a RAML Contract, generating a client proxy or enabling RAML metadata from the Visual Studio extension.
+These classes are used in the generated code and also in the RAML extraction process from an ASP.Net Web Api app.
+The nuget package is installed into the user project when adding a RAML contract, generating a client proxy or enabling RAML metadata from the Visual Studio extension.
+
+== Client Proxy Classes
+
+When adding a RAML Reference the Visual Studio Extension will generate a client proxy which uses classes contained in this package like ApiRequest, ApiResponse and SchemaValidation to name the more important ones.
 
 
-== Handling the response
+=== Handling the Request
+
+The ApiRequest class gives access to the Headers of the request.
+
+[source, c#]
+----
+    var req = new ApiRequest();
+    req.RawHeaders.Add("header1", "value");
+----
+
+This class is also used when a type was specified in the RAML as the base class for generated typed request.
+
+
+=== Handling the response
 
 The ApiResponse class provides the base behavoiur for a response, including the status code, and message of the response, the schema validation logic, the raw headers and content and a collection of formatters for the response.
 
@@ -70,7 +87,7 @@ var code = headers.Code;
 ----
 
 
-== Schema validation
+=== Schema validation
 
 *SchemaValidationSettings* class provides a mean for enabling or disabling the validation by setting the *Enabled* property.
 And to choose between raising or not exceptions when the validation fails by setting the *RaiseExceptions* property.
